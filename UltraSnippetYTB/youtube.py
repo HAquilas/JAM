@@ -195,6 +195,8 @@ try:
     
     #  Avant  --------------------------------------------
     
+    print("--------------------------    VIDEOS TOUVES   ------------------------------------")
+    
     for title, video_link in music_videos:
         print(f"Titre : {title}")
         print(f"Lien : {video_link}\n")
