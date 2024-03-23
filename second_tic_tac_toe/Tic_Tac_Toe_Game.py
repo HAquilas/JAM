@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
+import random
 
 root=Tk()
 root.title("Tic Tac Toe")
@@ -92,10 +93,47 @@ def disableButton():
     bu9.state(['disabled'])
 
 
+def autoPlayerTurn():
+    global a, b, c
+
+    # Vérifier s'il y a encore des cases vides
+    empty_buttons = [bu1, bu2, bu3, bu4, bu5, bu6, bu7, bu8, bu9]
+    available_buttons = [button for button in empty_buttons if button['text'] == ' ']
+
+    if len(available_buttons) > 0:
+        # Sélectionner une case vide au hasard
+        button = random.choice(available_buttons)
+        button['text'] = 'O'
+        button.state(['disabled'])
+
+        a = 1
+        b += 1
+
+        # Vérifier s'il y a un gagnant
+        if (bu1['text'] == 'O' and bu2['text'] == 'O' and bu3['text'] == 'O' or
+    bu4['text'] == 'O' and bu5['text'] == 'O' and bu6['text'] == 'O' or
+    bu7['text'] == 'O' and bu8['text'] == 'O' and bu9['text'] == 'O' or
+    bu1['text'] == 'O' and bu4['text'] == 'O' and bu7['text'] == 'O' or
+    bu2['text'] == 'O' and bu5['text'] == 'O' and bu8['text'] == 'O' or
+    bu3['text'] == 'O' and bu6['text'] == 'O' and bu9['text'] == 'O' or
+    bu1['text'] == 'O' and bu5['text'] == 'O' and bu9['text'] == 'O' or
+    bu3['text'] == 'O' and bu5['text'] == 'O' and bu7['text'] == 'O'):
+            disableButton()
+            c = 1
+            tkinter.messagebox.showinfo("Tic Tac Toe", "Le joueur 2 a gagné")
+
+        elif b == 9:
+            disableButton()
+            c = 1
+            tkinter.messagebox.showinfo("Tic Tac Toe", "Match nul")
+
+        playerturn['text'] = "   Player 1 turn!   "
+
+
 def ButtonClick(id):
     global a,b,c
     print("ID:{}".format(id))
-
+    
     #for player 1 turn
     if id==1 and bu1['text']==' ' and a==1:
         bu1['text']="X"
@@ -202,7 +240,8 @@ def ButtonClick(id):
     if a==1 and c==0:
         playerturn['text']="   Player 1 turn!   "
     elif a==0 and c==0:
-        playerturn['text']="   Player 2 turn!   "
+        # playerturn['text']="   Player 2 turn!   "
+        playerturn['text'] = "   Player 2 turn!   "
+        autoPlayerTurn()  # Appel de la fonction pour le mouvement automatique du joueur 2
             
 root.mainloop()
-

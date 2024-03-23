@@ -35,21 +35,109 @@ class Block() :
 		self.value	= value
 
 #-----------------------------------------------------------------------------------
+class GUI():
+    def __init__(self, windowName):
+        self.windowName = windowName
+        self.board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+        self.turn = 1
+        self.selected = False
+        self.change = False
+        self.vsCom = 2  # Le joueur contre lequel le joueur automatique joue
+        self.autoPlayer = 2  # Joueur automatique (2ème joueur)
 
-class GUI() :
-	def __init__(self,windowName) :
-		self.windowName	= windowName
-		self.width,self.height = 400,400
-		self.menuHeight = 100
-		self.image	= np.zeros((self.height+self.menuHeight,self.width,3),np.uint8)
-		self.turn	= 1
-		self.vsCom	= 0
-		self.reset()
+    def nextMove(self):
+        bestScore = float("-inf")
+        bestMove = None
+        for i in range(3):
+            for j in range(3):
+                if self.board[i][j] == 0:
+                    self.board[i][j] = self.autoPlayer
+                    score = self.minimax(self.board, 0, False)
+                    self.board[i][j] = 0
+                    if score > bestScore:
+                        bestScore = score
+                        bestMove = (i, j)
+        return bestMove
+
+    def minimax(self, board, depth, isMaximizing):
+        scores = {
+            1: -1,  # Le joueur humain
+            2: 1,   # Joueur automatique
+            0: 0    # Match nul
+        }
+        result = self.checkWin()
+        if result != -1:
+            return scores[result]
+        if isMaximizing:
+            bestScore = float("-inf")
+            for i in range(3):
+                for j in range(3):
+                    if board[i][j] == 0:
+                        board[i][j] = self.autoPlayer
+                        score = self.minimax(board, depth + 1, False)
+                        board[i][j] = 0
+                        bestScore = max(score, bestScore)
+            return bestScore
+        else:
+            bestScore = float("inf")
+            for i in range(3):
+                for j in range(3):
+                    if board[i][j] == 0:
+                        board[i][j] = 3 - self.autoPlayer
+                        score = self.minimax(board, depth + 1, True)
+                        board[i][j] = 0
+                        bestScore = min(score, bestScore)
+            return bestScore
+
+    def makeAutoMove(self):
+        if self.turn == self.autoPlayer:
+            block = self.nextMove()
+            block.setValue("x" if self.turn == 1 else "o")
+            self.selected = True
+            self.change = True
+
+    def mainLoop(self):
+        cv2.namedWindow(self.windowName, cv2.WINDOW_NORMAL)
+        cv2.resizeWindow(self.windowName, 600, 600)
+        while True and cv2.getWindowProperty(self.windowName, 1) != -1:
+            img = np.zeros((600, 600, 3), np.uint8)
+            self.drawGrid(img)
+            if not self.selected:
+                self.drawXO(img)
+            self.checkDraw()
+            self.checkWin()
+            cv2.imshow(self.windowName, img)
+            k = cv2.waitKey(1)
+            if k == 27:
+                break
+            if self.change:
+                self.turn = self.turn % 2 + 1
+                self.change = False
+            if self.vsCom == self.turn and not (self.checkWin() or self.checkDraw()):
+                self.makeAutoMove()
+        cv2.destroyAllWindows()
+
+# class GUI() :
+# 	def __init__(self,windowName) :
+# 		self.windowName	= windowName
+# 		self.width,self.height = 400,400
+# 		self.menuHeight = 100
+# 		self.image	= np.zeros((self.height+self.menuHeight,self.width,3),np.uint8)
+# 		self.turn	= 1
+# 		self.vsCom	= 0
+# 		self.reset()
+		# self.autoPlayer = 2  # Joueur automatique (2ème joueur)
+		# def makeAutoMove(self):
+        # 	if self.turn == self.autoPlayer:
+        #     	block = self.nextMove()
+        #     	block.setValue("x" if self.turn == 1 else "o")
+        #     	self.selected = True
+        #     	self.change = True
 	#-----------------------------------------------------------------------------------
 	#Reset Game
 	def reset(self) :
 		self.blocks	= []
-		self.win	= False
+		self.win = False
 		self.change 	= True
 		self.selected   = False
 		for i in range(3) :
