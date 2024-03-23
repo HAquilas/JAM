@@ -108,9 +108,12 @@ import random
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from datetime import datetime, timedelta
+import os
 
 # Clé d'API YouTube Data
-api_key = 'AIzaSyAY2_AqCmF8jEr3K5WoZHI9UXmjoaoclU8'  # Remplacez par votre propre clé d'API YouTube Data
+api_key = os.environ.get('YOUTUBE_API_KEY')
+if not api_key:
+    raise ValueError('Clé d\'API YouTube Data non définie dans les variables d\'environnement.')  # Remplacez par votre propre clé d'API YouTube Data
 
 # Création de l'objet YouTube Data API
 youtube = build('youtube', 'v3', developerKey=api_key)
