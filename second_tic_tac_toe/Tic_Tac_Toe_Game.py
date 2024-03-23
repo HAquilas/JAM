@@ -19,38 +19,70 @@ bu3.grid(row=0,column=2,sticky='snew',ipadx=40,ipady=40)
 bu3.config(command=lambda: ButtonClick(3))
 
 bu4=ttk.Button(root,text=' ')
-bu4.grid(row=1,column=0,sticky='snew',ipadx=40,ipady=40)
+bu4.grid(row=0,column=3,sticky='snew',ipadx=40,ipady=40)
 bu4.config(command=lambda: ButtonClick(4))
 
 bu5=ttk.Button(root,text=' ')
-bu5.grid(row=1,column=1,sticky='snew',ipadx=40,ipady=40)
+bu5.grid(row=1,column=0,sticky='snew',ipadx=40,ipady=40)
 bu5.config(command=lambda: ButtonClick(5))
 
 bu6=ttk.Button(root,text=' ')
-bu6.grid(row=1,column=2,sticky='snew',ipadx=40,ipady=40)
+bu6.grid(row=1,column=1,sticky='snew',ipadx=40,ipady=40)
 bu6.config(command=lambda: ButtonClick(6))
 
 bu7=ttk.Button(root,text=' ')
-bu7.grid(row=2,column=0,sticky='snew',ipadx=40,ipady=40)
+bu7.grid(row=1,column=2,sticky='snew',ipadx=40,ipady=40)
 bu7.config(command=lambda: ButtonClick(7))
 
 bu8=ttk.Button(root,text=' ')
-bu8.grid(row=2,column=1,sticky='snew',ipadx=40,ipady=40)
+bu8.grid(row=1,column=3,sticky='snew',ipadx=40,ipady=40)
 bu8.config(command=lambda: ButtonClick(8))
 
 bu9=ttk.Button(root,text=' ')
-bu9.grid(row=2,column=2,sticky='snew',ipadx=40,ipady=40)
+bu9.grid(row=2,column=0,sticky='snew',ipadx=40,ipady=40)
 bu9.config(command=lambda: ButtonClick(9))
 
+bu10=ttk.Button(root,text=' ')
+bu10.grid(row=2,column=1,sticky='snew',ipadx=40,ipady=40)
+bu10.config(command=lambda: ButtonClick(10))
+
+bu11=ttk.Button(root,text=' ')
+bu11.grid(row=2,column=2,sticky='snew',ipadx=40,ipady=40)
+bu11.config(command=lambda: ButtonClick(11))
+
+bu12=ttk.Button(root,text=' ')
+bu12.grid(row=2,column=3,sticky='snew',ipadx=40,ipady=40)
+bu12.config(command=lambda: ButtonClick(12))
+
+bu13=ttk.Button(root,text=' ')
+bu13.grid(row=3,column=0,sticky='snew',ipadx=40,ipady=40)
+bu13.config(command=lambda: ButtonClick(13))
+
+bu14=ttk.Button(root,text=' ')
+bu14.grid(row=3,column=1,sticky='snew',ipadx=40,ipady=40)
+bu14.config(command=lambda: ButtonClick(14))
+
+bu15=ttk.Button(root,text=' ')
+bu15.grid(row=3,column=2,sticky='snew',ipadx=40,ipady=40)
+bu15.config(command=lambda: ButtonClick(15))
+
+bu16=ttk.Button(root,text=' ')
+bu16.grid(row=3,column=3,sticky='snew',ipadx=40,ipady=40)
+bu16.config(command=lambda: ButtonClick(16))
+
 playerturn=ttk.Label(root,text="   Player 1 turn!  ")
-playerturn.grid(row=3,column=0,sticky='snew',ipadx=40,ipady=40)
+playerturn.grid(row=4,column=0,sticky='snew',ipadx=40,ipady=40)
 
 playerdetails=ttk.Label(root,text="    Player 1 is X\n\n    Player 2 is O")
-playerdetails.grid(row=3,column=2,sticky='snew',ipadx=40,ipady=40)
+playerdetails.grid(row=4,column=2,sticky='snew',ipadx=40,ipady=40)
 
 res=ttk.Button(root,text='Restart')
-res.grid(row=3,column=1,sticky='snew',ipadx=40,ipady=40)
+res.grid(row=4,column=1,sticky='snew',ipadx=40,ipady=40)
 res.config(command=lambda: restartbutton())
+
+vide=ttk.Label(root, text=' ')
+vide.grid(row=4,column=3,sticky='snew',ipadx=40,ipady=40)
+
 
 a=1
 b=0
@@ -136,7 +168,7 @@ def ButtonClick(id):
     
     #for player 1 turn
     if id==1 and bu1['text']==' ' and a==1:
-        bu1['text']="X"
+        bu1['text']="p"
         a=0
         b+=1
     if id==2 and bu2['text']==' ' and a==1:
