@@ -149,25 +149,7 @@ try:
         regionCode=country_code  # Filtre par pays
     ).execute()
 
-    # Récupération des titres de musique avec un nombre de vues supérieur au seuil et âge adéquat
-    
-    # Avant  -------------------------------------------------------------------------
-    # music_titles = []
-    # for item in search_response['items']:
-    #     video_id = item['id']['videoId']
-    #     video_response = youtube.videos().list(
-    #         id=video_id,
-    #         part='snippet,statistics'
-    #     ).execute()
-    #     view_count = int(video_response['items'][0]['statistics']['viewCount'])
-    #     published_at = video_response['items'][0]['snippet']['publishedAt']
-    #     published_date = datetime.strptime(published_at, '%Y-%m-%dT%H:%M:%SZ')
-    #     video_age = datetime.utcnow() - published_date
-    #     if view_count > views_threshold and video_age < max_age:
-    #         title = item['snippet']['title']
-    #         music_titles.append(title)
-    # Avant   ------------------------------------------------------------------------
-    
+   
     music_videos = []
     for item in search_response['items']:
         video_id = item['id']['videoId']
@@ -184,16 +166,6 @@ try:
             video_link = f"https://www.youtube.com/watch?v={video_id}"
             music_videos.append((title, video_link))
     
-    # Affichage des titres de musique
-    
-    #  Avant  -----------------------------------------
-    
-    # for title in music_titles:
-    #     print(title)
-    # if len(music_titles) == 0:
-    #      print("NOT FOUND !")
-    
-    #  Avant  --------------------------------------------
     
     print("--------------------------    VIDEOS TOUVES   ------------------------------------")
     
