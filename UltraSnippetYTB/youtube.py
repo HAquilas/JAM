@@ -70,7 +70,7 @@ try:
             music_videos.append((title, video_link))
     
     
-    print("--------------------------    VIDEOS TOUVES   ------------------------------------")
+    print("--------------------------    VIDEOS TROUVES   ------------------------------------")
     
     for title, video_link in music_videos:
         print(f"Titre : {title}")
