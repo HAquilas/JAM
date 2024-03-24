@@ -75,6 +75,8 @@ try:
     for title, video_link in music_videos:
         print(f"Titre : {title}")
         print(f"Lien : {video_link}\n")
+    if (len(music_videos) == 0):
+        print("AUCUNE VIDÉO TROUVÉE.\n")
 
 except ValueError as e:
     print('Erreur :', e)

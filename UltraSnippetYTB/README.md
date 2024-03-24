@@ -14,7 +14,17 @@ pip install google-api-python-client
 pip argparse
 
 ##  Usage 
-To execute the program, simply use 'python3' followed by the filename, with or without the flags (in any combination). It is optional to include one flag, two flags, or all three simultaneously.
+This program utilizes the YouTube Data API to search for and retrieve information about music videos. To use this program, you need to provide your own YouTube Data API key.
+
+Once you have obtained your YouTube Data API key, you can configure it in an environment variable on your machine. Here is how to do it:
+
+    On Linux/MacOS:
+
+export YOUTUBE_API_KEY="YOUR_API_KEY"
+
+    On Windows:
+
+set YOUTUBE_API_KEY=YOUR_API_KEY
 
 Example
 
